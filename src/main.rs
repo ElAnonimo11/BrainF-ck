@@ -1,6 +1,6 @@
 use std::fs::read_to_string;
 use std::collections::LinkedList;
-use std::io;
+use std::io::{self, Read, Write};
 
 fn main() {
     // We collect the data
@@ -15,7 +15,7 @@ fn main() {
     let archive_name: String = v_args[1].clone();
 
     // Wrong extension
-    if !archive_name.ends_with(".bf") && !archive_name.ends_with(".txt") {
+    if !archive_name.ends_with(".bf") && !archive_name.ends_with(".b") {
         panic!("Wrong archive extension");
     }
 
@@ -68,9 +68,16 @@ fn main() {
 
             // Take from screen
             ',' => {
-                let mut input:String = String::new();
-                io::stdin().read_line(&mut input).expect("Error reading the std input.");
-                v_nums[ind_nums] = input.trim().chars().next().unwrap_or(0u8 as char) as u8;
+                io::stdout().flush().unwrap();
+
+                let mut buffer: [u8;1] = [0u8];
+                io::stdin().read_exact(&mut buffer).expect("Error reading the data.");
+                let c: u8 = buffer[0];
+                if c.is_ascii() {
+                    v_nums[ind_nums] = c;
+                } else {
+                    panic!("No ASCII character inserted.");
+                }
             }
 
             // Add value
