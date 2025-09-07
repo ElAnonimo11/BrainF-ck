@@ -24,6 +24,7 @@ fn main() {
 
     // We save only the data that is part of brainfuck, and we save it in a vector for easy index.
     let v_data: Vec<char> = archive_data.chars().filter(|&e| ['[',']','.',',','+','-','<','>'].contains(&e)).collect();
+
     // The index that we are in the vector and the vector
     let mut ind_nums: usize = 0;
     let mut v_nums: Vec<u8> = vec![0];
@@ -69,7 +70,6 @@ fn main() {
             // Take from screen
             ',' => {
                 io::stdout().flush().unwrap();
-
                 let mut buffer: [u8;1] = [0u8];
                 io::stdin().read_exact(&mut buffer).expect("Error reading the data.");
                 let c: u8 = buffer[0];
