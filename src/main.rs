@@ -1,5 +1,4 @@
 use std::fs::read_to_string;
-use std::collections::LinkedList;
 use std::io::{self, Read, Write};
 
 fn main() {
@@ -33,14 +32,14 @@ fn main() {
     let mut ind_data: usize = 0;
 
     // Stack of indexes of []
-    let mut stack: LinkedList<usize> = LinkedList::new();
+    let mut stack: Vec<usize> = Vec::new();
 
     while ind_data < v_data.len() {
         let c: char = v_data[ind_data];
         match c {
             // We go to the next bracket if zero, else go into bracket saving the position
             '[' => if v_nums[ind_nums] != 0 {
-                stack.push_back(ind_data);
+                stack.push(ind_data);
             } else {
                 // We go to the next bracket
                 let mut cont_aux = 1;
@@ -59,9 +58,9 @@ fn main() {
 
             // We go back if it isn't zero, or go next
             ']' => if v_nums[ind_nums] != 0 {
-                ind_data = *stack.back().unwrap();
+                ind_data = *stack.last().unwrap();
             } else {
-                stack.pop_back().unwrap();
+                stack.pop().unwrap();
             },
 
             // Print in screen
