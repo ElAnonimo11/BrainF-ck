@@ -1,6 +1,6 @@
 [package]
 name = "BrainFuck"
 version = "1.0.0"
-edition = "2025"
+edition = "2024"
 
 [dependencies]
