@@ -77,7 +77,7 @@ fn main() {
                 } else {
                     panic!("No ASCII character inserted.");
                 }
-            }
+            },
 
             // Add value
             '+' => v_nums[ind_nums] = v_nums[ind_nums].wrapping_add(1),
@@ -94,7 +94,7 @@ fn main() {
                     v_nums.push(0);
                 }
                 ind_nums += 1;
-            }
+            },
 
             _ => panic!("Something not expected happened reading the file."),
         }
